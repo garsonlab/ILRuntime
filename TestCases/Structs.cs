@@ -128,15 +128,37 @@ namespace TestCases
 
     public class StructTests
     {
+        class MyClass
+        {
+            MyStruct stru = new MyStruct();            
+        }
         struct MyStruct
         {
             public int i;
+            public EnumTest.TestEnum e;
         }
 
         public static void StructTest1()
         {
             var m = new MyStruct[10];
             m[1] = new MyStruct();   // `Throw exception here.`
+        }
+
+        public static void StructTest2()
+        {
+            MyClass c = new MyClass();
+            Console.WriteLine(c.ToString());
+        }
+
+        public static void StructTest3()
+        {
+            var s = new MyStruct();
+            s.i = 123;
+            s.e = EnumTest.TestEnum.Enum2;
+            var b = s;
+
+            Console.WriteLine(s.e + " " + s.i);
+            Console.WriteLine(b.e + " " + b.i);
         }
     }
 }
