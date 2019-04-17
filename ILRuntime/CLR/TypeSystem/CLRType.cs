@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 
-using Mono.Cecil;
+using ILRuntime.Mono.Cecil;
 using ILRuntime.CLR.Method;
 using ILRuntime.Reflection;
 using ILRuntime.Runtime.Enviorment;
@@ -122,6 +122,16 @@ namespace ILRuntime.CLR.TypeSystem
         {
             get
             {
+                if (genericArguments != null)
+                {
+                    foreach(var i in genericArguments)
+                    {
+                        if(i.Value is ILType && i.Value.HasGenericParameter)
+                        {
+                            return true;
+                        }
+                    }
+                }
                 return clrType.ContainsGenericParameters;
             }
         }
